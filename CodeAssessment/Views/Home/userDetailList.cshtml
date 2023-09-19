@@ -1,0 +1,53 @@
+﻿@model IEnumerable<CodeAssessment.Models.UserDetail>
+
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <p>
+                <a asp-action="Create" class="btn btn-primary">New User</a>
+                <a asp-action="ExportToCsv" class="btn btn-success ml-2">Export to CSV</a>
+            </p>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col">
+            <table class="table table-bordered table-striped">
+                <thead class="table-primary">
+                    <tr>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Name)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.DateofBirth)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.MobileNumber)
+                        </th>
+                        <th>
+                            @Html.DisplayNameFor(model => model.Email)
+                        </th>                       
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.DateofBirth)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.MobileNumber)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Email)
+                            </td>                            
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div> 
+</div>

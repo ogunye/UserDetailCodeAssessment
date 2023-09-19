@@ -1,6 +1,15 @@
+using CodeAssessment.Data;
+using CodeAssessment.Repositories;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.FileSystemGlobbing.Internal.Patterns;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+builder.Services.AddScoped<IUserDetailsRepositroy, UserDetailRepository>();
+builder.Services.AddDbContext<ApplicationDbContext>(options =>
+options.UseSqlServer(builder.Configuration.GetConnectionString("sqlConnection")));
 builder.Services.AddControllersWithViews();
 
 var app = builder.Build();
@@ -23,5 +32,11 @@ app.UseAuthorization();
 app.MapControllerRoute(
     name: "default",
     pattern: "{controller=Home}/{action=Index}/{id?}");
+
+app.MapControllerRoute(
+    name: "export",
+    pattern: "export/csv",
+    defaults: new {controller = "Home", action = "ExportToCsv"});
+
 
 app.Run();
